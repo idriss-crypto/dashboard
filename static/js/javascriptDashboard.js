@@ -1,5 +1,4 @@
 // for resolving part -> export to separate file?
-// ToDo: use IDriss library
 var walletTags = {
     evm: {
         ETH: {
@@ -105,6 +104,11 @@ const regPh = /^(\+\(?\d{1,4}\s?)\)?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}
 const regM = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
 const regT = /^@[a-zA-Z0-9_]{1,15}$/;
 
+const GAS_LIMIT_ADD_REVERSE  = 280000;
+const GAS_LIMIT_DELETE_REVERSE = 50000;
+const GAS_LIMIT_DELETE_IDRISS = 150000;
+const GAS_LIMIT_CHANGE_OWNER = 50000;
+
 function lowerFirst(string_) {
     return string_.charAt(0).toLowerCase() + string_.slice(1);
 }
@@ -161,7 +165,6 @@ const Web3Modal = window.Web3Modal.default;
 const WalletConnectProvider = window.WalletConnectProvider.default;
 const evmChains = window.evmChains;
 const WalletLink = window.WalletLink;
-const Fortmatic = window.Fortmatic;
 
 // set default web3 + provider for frontend checks w/o connecting wallet
 const defaultWeb3 = new Web3(new Web3.providers.HttpProvider("https://rpc.ankr.com/polygon"));
@@ -215,29 +218,32 @@ let TallyOpts = {
         display: {
             logo: "../static/images/tally.svg",
             name: "Tally",
-            description: "Coming Soon",
+            description: "Connect to your Tally Ho! Wallet",
         },
         package: true,
         connector: async () => {
             if (!isTallyInstalled()) {
                     window.open("https://tally.cash/community-edition", '_blank'); // <-- LOOK HERE
-                    throw new Error("Tally not supported yet.");
+                    return;
                 }
-
-                let provider = null;
-                if (typeof window.ethereum !== 'undefined') {
-
-                    provider = window.ethereum
-                    try {
-                        await provider.request({ method: 'eth_requestAccounts' });
-                    } catch (error) {
-                        throw new Error("User Rejected");
-                    }
+            let provider = null;
+            if (typeof window.ethereum !== 'undefined') {
+                let providers = window.ethereum.providers;
+                if (providers){
+                    provider = providers.find(p => p.isTally);
                 } else {
-                    throw new Error("No Tally Wallet found");
+                    provider = window.ethereum
                 }
-                console.log("Tally provider", provider);
-                return provider;
+                try {
+                    await provider.request({ method: 'eth_requestAccounts' });
+                } catch (error) {
+                    throw new Error("User Rejected");
+                }
+            } else {
+                throw new Error("No Tally Ho! Wallet found");
+            }
+            console.log("Tally provider", provider);
+            return provider;
         },
     },
 };
@@ -315,26 +321,11 @@ let WalletLinkOpts = {
     },
 };
 
-let customNetworkOptions = {
-    rpcUrl: "https://rpc-mainnet.maticvigil.com/",
-    chainId: 137
-}
-
-let providerOptionsFM = {
-  fortmatic: {
-    package: Fortmatic, // required
-    options: {
-      key: "pk_live_05E291BB168EC551", // required
-      network: customNetworkOptions // if we don't pass it, it will default to localhost:8454
-    }
-  }
-};
 
 async function connectWallet() {
     const providerOptions = {
         ...WalletConnectOpts,
         ...WalletLinkOpts,
-        ...providerOptionsFM
     }
 
     if (deviceType() === "desktop") {
@@ -402,6 +393,7 @@ async function disconnectWallet() {
     // If the cached provider is not cleared,
     // WalletConnect will default to the existing session
     // and does not allow to re-scan the QR code with a new wallet.
+    // Depending on your use case you may want or want not his behavior.
     await web3Modal.clearCachedProvider();
     provider = null;
   }
@@ -421,6 +413,7 @@ async function disconnectWallet() {
 }
 
 //POPUP
+
 
 //Adding given IDriss to the dashboard + checking rewards + closing the popup
 async function addIDriss() {
@@ -775,8 +768,8 @@ async function addReverseConfirm(_walletTag, _hash) {
         console.log(_handle, _walletTag)
         await fetch('https://gasstation-mainnet.matic.network/v2')
         .then(response => response.json())
-        .then(json => gas = String(Math.round(json['standard']['maxFee']*1000000000)))
-        await reverseContract.methods.registerReverseIDriss(_handle, _walletTag).send({ from: selectedAccount, value: 0,  gasPrice: gas });
+        .then(json => gas_ = String(Math.round(json['standard']['maxFee']*1000000000)))
+        await reverseContract.methods.registerReverseIDriss(_handle, _walletTag).send({ from: selectedAccount, value: 0,  gasPrice: gas_, gas: GAS_LIMIT_ADD_REVERSE});
         document.getElementById("PopupAddReverse").style.display = "none";
         document.getElementById("Spinner4").style.display = "none";
         document.getElementById("ButtonSpinner4").innerHTML = "Confirm";
@@ -876,8 +869,8 @@ async function deleteReverseConfirm(_address) {
         let reverseContract = await loadContractReverse(web3);
         await fetch('https://gasstation-mainnet.matic.network/v2')
         .then(response => response.json())
-        .then(json => gas = String(Math.round(json['standard']['maxFee']*1000000000)))
-        await reverseContract.methods.deleteReverseMapping().send({ from: selectedAccount, value: 0,  gasPrice: gas });
+        .then(json => gas_ = String(Math.round(json['standard']['maxFee']*1000000000)))
+        await reverseContract.methods.deleteReverseMapping().send({ from: selectedAccount, value: 0,  gasPrice: gas_, gas: GAS_LIMIT_DELETE_IDRISS });
         document.getElementById("PopupDeleteReverse").style.display = "none";
         document.getElementById("Spinner5").style.display = "none";
         document.getElementById("ButtonSpinner5").innerHTML = "Remove";
@@ -982,7 +975,7 @@ async function changeOwner(hash_) {
                     });
 
                 } else if (verificationInput.match(regT)) {
-                    // twitter path
+                    // do the whole twitter thing
                     console.log("Getting tweetContent")
                     $.ajax({
                         url: "/v1/verifyTwitter",
@@ -1003,6 +996,9 @@ async function changeOwner(hash_) {
                     document.getElementById("PopupButtonChangeOwnerFromIDriss").onclick = function() { transferOwnerConfirmTwitter(); }
                 }
             }
+            //  trigger error 3 Error???
+            //3. Neither from the above -> trigger error "you are not the owner"
+            //PATH 3 ERROR:   document.getElementById("ErrorNotAnOwner").style.display = "";
             document.getElementById('ErrorNotAnOwner').style.display = 'block';
             throw new Error("Only IDrissOwner can delete binding");
         } else {
@@ -1018,6 +1014,10 @@ async function changeOwner(hash_) {
 }
 
 async function sendOTP(identifier_, password_="") {
+
+//PATH 1 POPUP:   document.getElementById("PopupChangeOwnerFromIDriss").style.display = "";
+// button has these attributes: id="PopupButtonChangeOwnerFromIDriss" onclick="changeOwner()"
+// error with password: document.getElementById("ErrorWrongPasswordChangeOwner").style.display = "";
 
     hash_ = document.getElementById("PopupChangeOwnerFromIDriss").value
     if (!document.getElementById("CheckboxPasswordChangeOwner").checked) {
@@ -1127,8 +1127,8 @@ async function changeOwnerConfirm() {
         let localContract = await loadContractLocal(web3);
         await fetch('https://gasstation-mainnet.matic.network/v2')
         .then(response => response.json())
-        .then(json => gas = String(Math.round(json['standard']['maxFee']*1000000000)))
-        await localContract.methods.transferIDrissOwnership(hash_, newIDrissOwner).send({ from: selectedAccount, value: 0,  gasPrice: gas });
+        .then(json => gas_ = String(Math.round(json['standard']['maxFee']*1000000000)))
+        await localContract.methods.transferIDrissOwnership(hash_, newIDrissOwner).send({ from: selectedAccount, value: 0,  gasPrice: gas_, gas: GAS_LIMIT_CHANGE_OWNER });
         document.getElementById("PopupChangeOwner").style.display = "none";
         document.getElementById("Spinner2").style.display = "none";
         document.getElementById("ButtonSpinner2").innerHTML = "Change";
@@ -1160,7 +1160,6 @@ async function changeOwnerConfirm() {
 }
 
 //Deleting given IDriss link
-//ToDo: allow deleting when reverse record is to different IDriss
 
 async function deleteIDriss(hash_, address_) {
     console.log(hash_)
@@ -1203,8 +1202,9 @@ async function deleteIDrissConfirm() {
         let localContract = await loadContractLocal(web3);
         await fetch('https://gasstation-mainnet.matic.network/v2')
         .then(response => response.json())
-        .then(json => gas = String(Math.round(json['standard']['maxFee']*1000000000)))
-        await localContract.methods.deleteIDriss(hash_).send({ from: selectedAccount, value: 0,  gasPrice: gas });
+        .then(json => gas_ = String(Math.round(json['standard']['maxFee']*1000000000)))
+        console.log(gas_)
+        await localContract.methods.deleteIDriss(hash_).send({ from: selectedAccount, value: 0,  gasPrice: gas_, gas: GAS_LIMIT_DELETE_IDRISS });
         document.getElementById("PopupDeleteIDriss").style.display = "none";
         elem = document.getElementById(hash_);
         elem.parentNode.removeChild(elem);
@@ -1267,7 +1267,7 @@ function closePopupDeleteReverse() {
 }
 
 
-//Adding next IDriss to the dashboard and to the reward system
+//Adding next IDriss to the dashbord and to the reward system
 
 async function addNextIDriss() {
     inputString = document.getElementById("InputNewIDriss").value;
@@ -1326,7 +1326,12 @@ async function refreshRewards() {
 }
 
 function isMetaMaskInstalled(){
-    if (window.ethereum.isMetaMask) {
+    let providers = window.ethereum.providers;
+    let pMM;
+    if (providers){
+        pMM = providers.find(p => p.isMetaMask);
+    }
+    if (pMM) {
         return true
     }
     else {
@@ -1335,7 +1340,12 @@ function isMetaMaskInstalled(){
 }
 
 function isTallyInstalled(){
-    if (window.ethereum.isTally) {
+    let providers = window.ethereum.providers;
+    let pTally;
+    if (providers){
+        pTally = providers.find(p => p.isTally);
+    }
+    if (pTally) {
         return true
     }
     else {
@@ -1608,6 +1618,7 @@ function calcPointsLocal() {
     }
 }
 
+//OTHER
 
 //Show and hide password input field in the change ownership popup
 
@@ -1634,6 +1645,15 @@ async function copyReferralLink() {
                     tooltip3.style.visibility = "hidden";
                 }, 1000);
 }
+
+
+//async function showTooltip2() {
+  //  document.getElementById("tooltip2").style.visibility = "visible";
+//}
+
+//async function hideTooltip2() {
+  //  document.getElementById("tooltip2").style.visibility = "hidden";
+//}
 
 
 document.getElementById("InputIDriss").addEventListener("keyup", function (event) {
