@@ -212,7 +212,6 @@ async function loadContractReverse(web3) {
 
 // Contract to interact with for payment
 let contract;
-
 let TallyOpts = {
     "custom-tally": {
         display: {
@@ -321,7 +320,6 @@ let WalletLinkOpts = {
     },
 };
 
-
 async function connectWallet() {
     const providerOptions = {
         ...WalletConnectOpts,
@@ -368,6 +366,9 @@ async function connectWallet() {
             document.getElementById("account").innerHTML = "(".concat(account.substring(0,6)).concat("...").concat(account.substr(-4)).concat(")");
             console.log("Account changed")
             console.log(account)
+            await sleep(1500).then(() => {
+                    console.log("sleeping done inside");
+                });
             checkOwnership();
         } else {
             disconnectWallet();
@@ -411,8 +412,6 @@ async function disconnectWallet() {
   account = undefined;
   await checkOwnership();
 }
-
-//POPUP
 
 
 //Adding given IDriss to the dashboard + checking rewards + closing the popup
@@ -644,8 +643,9 @@ async function checkPayment() {
         data: {txn_hash: txn_hash},
         dataType: "json",
         success: async function (data) {
-            // add some wait time/ reload page?
-            // after successfully adding the hash, it does not show success otherwise
+            await sleep(3000).then(() => {
+                console.log("sleeping done inside");
+            });
             addIDriss();
         },
         error: function (data) {
@@ -661,6 +661,10 @@ async function checkPayment() {
             }
         }
     });
+}
+
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function checkOwnership(){
@@ -828,8 +832,8 @@ async function addReverseConfirm(_walletTag, _hash) {
 
 async function checkReverse(_address) {
     try {
-        let reverseContract = await loadContractReverse(defaultWeb3);
-        reverse = await reverseContract.methods.reverseIDriss(_address).call();
+        let idriss = new IdrissCrypto.IdrissCrypto();
+        reverse = await await idriss.reverseResolve(_address);
         if (reverse) {
             return true
         }
@@ -1164,9 +1168,10 @@ async function changeOwnerConfirm() {
 async function deleteIDriss(hash_, address_) {
     console.log(hash_)
     document.getElementById("PopupDeleteIDriss").value = hash_;
-    let reverseContract = await loadContractReverse(defaultWeb3);
-    reverse = await reverseContract.methods.reverseIDriss(address_).call();
-    if (reverse) {
+    let idriss = new IdrissCrypto.IdrissCrypto();
+    reverse = await idriss.reverseResolve(address_);
+    let tempIDriss = document.getElementById("firstInput").innerText;
+    if (reverse.toLowerCase() == tempIDriss.toLowerCase()) {
         document.getElementById('notOwnerError').innerHTML = "You have to remove the reverse record before deleting your IDriss.";
         document.getElementById('notOwnerError').style.display = "block";
         document.getElementById("PopupButtonDeleteIDriss").style.display = "none";
@@ -1330,6 +1335,8 @@ function isMetaMaskInstalled(){
     let pMM;
     if (providers){
         pMM = providers.find(p => p.isMetaMask);
+    } else if (window.ethereum.isMetaMask) {
+        return true
     }
     if (pMM) {
         return true
@@ -1508,6 +1515,7 @@ async function makeApiCallOwner(digested) {
         }
     }
 }
+
 let a;
 async function makeApiCallPoints(hashDict) {
     $.ajax({
