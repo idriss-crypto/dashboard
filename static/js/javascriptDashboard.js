@@ -1,4 +1,4 @@
-// for resolving part -> export to separate file?
+// for resolving part
 var walletTags = {
     evm: {
         ETH: {
