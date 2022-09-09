@@ -764,8 +764,8 @@ async function addReverseConfirm(_walletTag, _hash) {
         }
         await switchtopolygon();
         document.getElementById('ReverseError').style.display = "none";
-        let reverseContract = await loadContractReverse(web3);
-        reverse = await reverseContract.methods.reverseIDriss(selectedAccount).call();
+        let idriss = new IdrissCrypto.IdrissCrypto();
+        reverse = await await idriss.reverseResolve(selectedAccount);
         if (reverse) {
             throw new Error("Reverse mapping exists.");
         }
