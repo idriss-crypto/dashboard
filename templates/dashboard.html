@@ -1,139 +1,221 @@
 <!DOCTYPE html>
 <html class="h-full bg-white">
-   <head>
-      <title>IDriss Dashboard</title>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="description" content="Manage your IDriss and reward points.">
-      <script src="https://cdn.tailwindcss.com"></script>
-      <link rel="apple-touch-icon" sizes="180x180" href="../static/images/apple-touch-icon.png"/>
-      <link rel="shortcut icon" type="image/png" href="../static/images/favicon32.png"/>
-	  <link rel="icon" type="image/png" sizes="32x32" href="../static/images/favicon32.png"/>
-	  <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon16.png"/>
-      <style>
-         ::-webkit-scrollbar {
-         width: 6px;
-         height: 6px;
-         }
-         ::-webkit-scrollbar-track {
-         border-radius: 10px;
-         background: rgba(0,0,0,0.1);
-         }
-         ::-webkit-scrollbar-thumb{
-         border-radius: 10px;
-         background: rgba(0,0,0,0.2);
-         }
-         ::-webkit-scrollbar-thumb:hover{
-         background: rgba(0,0,0,0.4);
-         }
-         ::-webkit-scrollbar-thumb:active{
-         background: rgba(0,0,0,.9);
-         }
-         .tooltipOwner {
-         position: absolute;
-         width: auto;
-         background-color: black;
-         color: #fff;
-         text-align: center;
-         border-radius: 6px;
-         padding: 0px 5px;
-         margin: auto;
-         }
-         #tooltip {
-         visibility: hidden;
-         width: 80px;
-         background-color: black;
-         color: #fff;
-         text-align: center;
-         border-radius: 6px;
-         padding: 0px 5px;
-         margin: auto;
-         }
-         #tooltip3 {
-         position: fixed;
-         visibility: hidden;
-         width: auto;
-         background-color: black;
-         color: #fff;
-         text-align: center;
-         border-radius: 6px;
-         padding: 0px 5px;
-         margin: auto;
-         margin-left: 100px;
-         }
-         body {
-         background-color: #ffffff;
-         }
-      </style>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-YM1B80KWY4"></script>
-      <script>
-         window.dataLayer = window.dataLayer || [];
-         function gtag(){dataLayer.push(arguments);}
-         gtag('js', new Date());
+    <head>
+        <title>IDriss Dashboard</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+            name="description"
+            content="Manage your IDriss and reward points."
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="../static/images/apple-touch-icon.png"
+        />
+        <link
+            rel="shortcut icon"
+            type="image/png"
+            href="../static/images/favicon32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="../static/images/favicon32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="../static/images/favicon16.png"
+        />
+        <style>
+            ::-webkit-scrollbar {
+                width: 6px;
+                height: 6px;
+            }
+            ::-webkit-scrollbar-track {
+                border-radius: 10px;
+                background: rgba(0, 0, 0, 0.1);
+            }
+            ::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                background: rgba(0, 0, 0, 0.2);
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: rgba(0, 0, 0, 0.4);
+            }
+            ::-webkit-scrollbar-thumb:active {
+                background: rgba(0, 0, 0, 0.9);
+            }
+            .tooltipOwner {
+                position: absolute;
+                width: auto;
+                background-color: black;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 0px 5px;
+                margin: auto;
+            }
+            #tooltip {
+                visibility: hidden;
+                width: 80px;
+                background-color: black;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 0px 5px;
+                margin: auto;
+            }
+            #tooltip3 {
+                position: fixed;
+                visibility: hidden;
+                width: auto;
+                background-color: black;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 0px 5px;
+                margin: auto;
+                margin-left: 100px;
+            }
+            body {
+                background-color: #ffffff;
+            }
+        </style>
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-YM1B80KWY4"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
 
-         gtag('config', 'UA-208296810-1');
-         gtag('config', 'G-YM1B80KWY4');
-      </script>
-   </head>
-   <body class="h-full">
-    <div class="min-h-full">
-        <!-- NAVIGATION BAR -->
-      <nav>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex items-center justify-between h-16">
-            <div class="flex items-center">
-              <div class="flex-shrink-0">
-                  <a href="/">
-                <img class="h-8 w-auto sm:h-12" src="../static/images/IDriss_Logo.svg" alt="Workflow">
-                  </a>
-              </div>
-              <div class="">
-                <div class="ml-10 flex items-baseline space-x-4">
-                  <a id="ButtonManageIDrissTab" onclick="manageIDrissTab()" class="bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer" aria-current="page">Manage IDriss</a>
-                  <a id="ButtonRewardsTab" onclick="rewardsTab()" class="text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer">Rewards</a>
+            gtag("config", "UA-208296810-1");
+            gtag("config", "G-YM1B80KWY4");
+        </script>
+    </head>
+    <body class="h-full">
+        <div class="min-h-full">
+            <!-- NAVIGATION BAR -->
+            <nav>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between h-16">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <a href="/">
+                                    <img
+                                        class="h-8 w-auto sm:h-12"
+                                        src="../static/images/IDriss_Logo.svg"
+                                        alt="Workflow"
+                                    />
+                                </a>
+                            </div>
+                            <div class="">
+                                <div
+                                    class="ml-10 flex items-baseline space-x-4"
+                                >
+                                    <a
+                                        id="ButtonManageIDrissTab"
+                                        onclick="manageIDrissTab()"
+                                        class="bg-indigo-50 text-[#5865F2] hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+                                        aria-current="page"
+                                    >
+                                        Manage IDriss
+                                    </a>
+                                    <a
+                                        id="ButtonRewardsTab"
+                                        onclick="rewardsTab()"
+                                        class="text-gray-500 hover:bg-indigo-50 hover:text-[#5865F2] px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
+                                        >Rewards</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hidden sm:block">
+                            <div class="ml-4 flex items-center md:ml-6">
+                                <div class="ml-3 relative">
+                                    <div
+                                        class="sm:flex items-center justify-end md:flex-1"
+                                    >
+                                        <img
+                                            id="GreenDot"
+                                            style="display: none"
+                                            class="pt-1 w-2 mr-1 self-center"
+                                            src="../static/images/green_dot.png"
+                                            alt="green_dot"
+                                        />
+                                        <p id="account"></p>
+                                        <input
+                                            id="connectDesktop"
+                                            onclick="connectWallet()"
+                                            type="submit"
+                                            value="Connect Wallet"
+                                            class="ml-4 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#11dd74] hover:bg-[#11cc74] hover:cursor-pointer"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-
-            <div class="hidden sm:block">
-              <div class="ml-4 flex items-center md:ml-6">
-                <div class="ml-3 relative">
-                  <div class="sm:flex items-center justify-end md:flex-1">
-                      <img id="GreenDot" style="display:none" class="pt-1 w-2 mr-1 self-center" src="../static/images/green_dot.png" alt="green_dot">
-                      <p id="account"></p>
-                    <input id="connectDesktop" onclick="connectWallet()" type="submit" value="Connect Wallet" class="ml-4 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#11dd74] hover:bg-[#11cc74] hover:cursor-pointer">
-                   </div>
+            </nav>
+            <!-- HEADER -->
+            <header class="bg-white shadow flex sm:block">
+                <div class="px-4 py-6 sm:max-w-7xl sm:mx-auto sm:px-6 lg:px-8">
+                    <h1
+                        id="HeaderContent"
+                        class="text-3xl font-bold text-gray-900"
+                    >
+                        Manage IDriss
+                    </h1>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-    <!-- HEADER -->
-      <header class="bg-white shadow flex sm:block">
-        <div class="px-4 py-6 sm:max-w-7xl sm:mx-auto sm:px-6 lg:px-8">
-          <h1 id="HeaderContent" class="text-3xl font-bold text-gray-900">Manage IDriss</h1>
-        </div>
-        <div class="px-4 py-6 ml-auto block sm:hidden relative">
-          <div class="md:flex items-center justify-end md:flex-1 lg:w-0">
-            <input id="connectMobile" onclick="connectWallet()" type="submit" value="Connect Wallet" class="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#11dd74] hover:bg-[#11cc74] hover:cursor-pointer">
-              <div class="flex justify-center">
-              <img id="GreenDot2" style="display:none" class="pt-1 w-2 mr-1 self-center" src="../static/images/green_dot.png" alt="green_dot">
-              <p class="text-center" id="account2"></p>
-              </div>
-          </div>
-        </div>
-      </header>
-    <!-- MAIN CONTENT -->
-      <main>
-        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-
-                <!-- MANAGE IDRISS TAB
+                <div class="px-4 py-6 ml-auto block sm:hidden relative">
+                    <div
+                        class="md:flex items-center justify-end md:flex-1 lg:w-0"
+                    >
+                        <input
+                            id="connectMobile"
+                            onclick="connectWallet()"
+                            type="submit"
+                            value="Connect Wallet"
+                            class="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#11dd74] hover:bg-[#11cc74] hover:cursor-pointer"
+                        />
+                        <div class="flex justify-center">
+                            <img
+                                id="GreenDot2"
+                                style="display: none"
+                                class="pt-1 w-2 mr-1 self-center"
+                                src="../static/images/green_dot.png"
+                                alt="green_dot"
+                            />
+                            <p class="text-center" id="account2"></p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- MAIN CONTENT -->
+            <main>
+                <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                    <!-- MANAGE IDRISS TAB
                 -->
-              <div id="ManageIDrissContent" class="px-4 py-6 sm:px-0">
-                  <div class="flex">
-                    <a id="AddedIDrissName" class="bg-green-100 text-[#11dd74] px-3 py-2 rounded-md text-sm font-medium" aria-current="page" style="cursor:default">IDriss</a>
-                      <!--
+                    <div id="ManageIDrissContent" class="px-4 py-6 sm:px-0">
+                        <div class="flex">
+                            <a
+                                id="AddedIDrissName"
+                                class="bg-green-100 text-[#11dd74] px-3 py-2 rounded-md text-sm font-medium"
+                                aria-current="page"
+                                style="cursor: default"
+                                >IDriss</a
+                            >
+                            <!--
                       <div onclick="window.location.href='/'" class="ml-2 flex items-center text-sm text-gray-500 hover:cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                           <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
@@ -141,505 +223,1423 @@
                         Add new wallet address
                       </div>
                       -->
-                  </div>
-                <br>
-                <div id="WrapperAllResolved">
-                </div>
-                  <p id="ErrorNotAnOwner" class="text-red-500 font-medium hidden mt-1">You are not the owner of this IDriss. Connect the owner wallet.</p>
-              </div>
-            <!-- REWARDS TAB
+                        </div>
+                        <br />
+                        <div id="WrapperAllResolved"></div>
+                        <p
+                            id="ErrorNotAnOwner"
+                            class="text-red-500 font-medium hidden mt-1"
+                        >
+                            You are not the owner of this IDriss. Connect the
+                            owner wallet.
+                        </p>
+                    </div>
+                    <!-- REWARDS TAB
                 -->
-              <div id="RewardsContent" class="px-4 py-6 sm:px-0" style="display:none">
-
-                    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                        <div class="sm:flex">
-                          <div class="px-4 py-5 sm:px-6">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900">Your IDriss reward points</h3>
-                            <p class="mt-1 max-w-2xl text-sm text-gray-500">It pays off to contribute!</p>
-                          </div>
-
-                            <div id="RewardsLinks" class="flex pl-4 sm:pl-0 pb-5 sm:pb-0">
-                                <div class="self-center">
-                                    <a href="" id="AddedIDrissNameRewards" onclick="" class="bg-green-100 text-[#11dd74] px-3 py-2 rounded-md text-sm font-medium" aria-current="page" style="cursor:default">IDriss</a>
+                    <div
+                        id="RewardsContent"
+                        class="px-4 py-6 sm:px-0"
+                        style="display: none"
+                    >
+                        <div
+                            class="bg-white shadow overflow-hidden sm:rounded-lg"
+                        >
+                            <div class="sm:flex">
+                                <div class="px-4 py-5 sm:px-6">
+                                    <h3
+                                        class="text-lg leading-6 font-medium text-gray-900"
+                                    >
+                                        Your IDriss reward points
+                                    </h3>
+                                    <p
+                                        class="mt-1 max-w-2xl text-sm text-gray-500"
+                                    >
+                                        It pays off to contribute!
+                                    </p>
                                 </div>
-                                <div onclick="openPopupAddNewIDrissRewards()" class="ml-2 flex items-center text-sm text-gray-500 hover:cursor-pointer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
-                                    </svg>
-                                    Add new IDriss
-                                </div>
-                            </div>
-                        </div>
-                      <div class="border-t border-gray-200">
-                        <dl>
-                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">Your Referral Link</dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                              <ul role="list" class="border border-gray-200 rounded-md divide-y divide-gray-200">
-                                <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                                  <div class="w-0 flex-1 flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
-                                      <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" />
-                                    </svg>
-                                      <div onclick="copyReferralLink()" class="ml-2 flex-1 w-0 truncate outline-0 bg-white">
-                                          <span id="ReferralLink"></span> 🥳🎈
-                                      </div>
-                                      <div id="tooltip3" class="text-sm">Referral link copied!</div>
-                                  </div>
-                                  <div class="ml-4 flex-shrink-0">
-                                    <a onclick="copyReferralLink()" class="font-medium text-indigo-600 hover:text-indigo-500 hover:cursor-pointer">Copy</a>
-                                  </div>
-                                </li>
-                              </ul>
-                            </dd>
-                          </div>
-                          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">Referrals</dt>
-                              <div class="flex">
-                                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><span id="Referrals">0</span></dd>
-                              </div>
-                          </div>
-                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">Sign-Ups</dt>
-                              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><span id="RegisteredNames">0</span></dd>
-                          </div>
-                          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">Add New Tweet</dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                              <ul role="list" class="border border-gray-200 rounded-md divide-y divide-gray-200">
-                                <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                                  <div class="w-0 flex-1 flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
-                                      <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" />
-                                    </svg>
-                                      <input id="InputTweetLink" name="password" type="text" class="ml-2 flex-1 w-0 truncate outline-0 bg-gray-50" placeholder="https://twitter.com/IDriss_xyz/status/1490374875537625096" autofocus>
-                                  </div>
-                                  <div class="ml-4 flex-shrink-0">
-                                    <a id="ButtonAddTweet" onclick="addTweet()" class="font-medium text-indigo-600 hover:text-indigo-500 hover:cursor-pointer">Add</a>
-                                  </div>
-                                </li>
-                              </ul>
-                                <p id="noTweetFoundError" class="text-red-500 font-medium hidden mt-1">Could not find your tweet.</p>
-                                <p id="notMentionedError" class="text-red-500 font-medium hidden mt-1">Make sure your tweet contains both #IDriss and @IDriss_xyz.</p>
-                            </dd>
-                          </div>
-                          <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">Twitter Likes</dt>
-                              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><span id="TwitterLikes">0</span></dd>
-                          </div>
-                          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">Twitter Retweets</dt>
-                              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><span id="TwitterRetweets">0</span></dd>
-                          </div>
-                          <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">Discord Invites</dt>
-                                <div class="flex">
-                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                        <ul role="list" class="border border-gray-200 rounded-md divide-y divide-gray-200">
-                                            <li class="pl-3 py-3 flex items-center justify-between text-sm">
-                                                <div class="w-7 flex-1 flex items-center">
-                                                    <input id="InputDiscordInvites" disabled name="password" type="text" class="flex-1 w-0 outline-0 bg-white truncate" placeholder="0">
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </dd>
-                                  <svg onclick="enableInputDiscordInvites()" xmlns="http://www.w3.org/2000/svg" class="ml-2 h-5 w-5 text-gray-500 self-center hover:cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                                  </svg>
-                                </div>
-                          </div>
 
-                           <div class="bg-green-100 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-bold text-gray-900">TOTAL REWARD POINTS</dt>
-                                <div class="flex">
-                                  <dd class="mt-1 text-sm font-bold text-gray-900 sm:mt-0 sm:col-span-2"><span id="TotalRewards">0</span></dd>
-                                  <svg id="ButtonRefreshRewards" onclick="refreshRewards()" xmlns="http://www.w3.org/2000/svg" class="ml-2 mt-1 sm:mt-0 h-5 w-5 self-center text-gray-500 hover:cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
-                                  </svg>
-                                </div>
-                          </div>
-
-                        </dl>
-                      </div>
-                    </div>
-              </div>
-
-
-        </div>
-      </main>
-    </div>
-
-                <div id="PopupAddIDriss" style="" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true">
-                        </div>
-                        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                <div class="sm:flex sm:items-start">
-                                    <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#11dd74]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </div>
-                                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                        <h3 class="text-lg leading-6 font-medium text-gray-900">What is your IDriss?</h3>
-                                        <div class="mt-2">
-                                            <p class="text-sm text-gray-500 mb-2">Input your email, phone number or Twitter username:</p>
-                                            <input type="text" id="InputIDriss" name="" class="shadow appearance-none border rounded w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="" autofocus>
-                                        </div>
-                                            <p id="ErrorNoIDrissFound" class="text-red-500 font-medium hidden mt-1">No IDriss found. Did you register one?</p>
-                                        <div id="DivTxnHash" class="" style="display:none">
-                                            <p class="text-sm text-gray-500 mb-2">Input the transaction hash to re-check:</p>
-                                            <input type="text" id="InputTxnHash" name="" class="shadow appearance-none border rounded w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="0x7799373fd1ac413fcb24fa31ee6596921a45d813b7f4d9939080dd94f7b7d21e" autofocus>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                                <button id="ButtonAddIDriss" type="button" onclick="addIDriss()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#11dd74] text-base font-medium text-white hover:bg-[#11cc74] focus:outline-none sm:ml-3 sm:w-24 sm:text-sm">
-                                    <span id="ButtonSpinner1">Add</span>
-                                    <div id="Spinner1" style="display:none" class="ml-1 flex justify-center items-center">
-                                       <div class="spinner-border animate-spin inline-block w-5 h-5 border-2 border-white rounded-full" role="status">
-                                         <span class="text-xl text-black">•</span>
-                                       </div>
-                                       <span class="ml-1 text-white text-base font-medium sm:text-sm"></span>
-                                     </div>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="PopupChangeOwnerFromIDriss" style="display: none;" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-                        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                            <div class="bg-white px-4 pt-5">
-                                <div class="sm:flex sm:items-start">
-                                    <div onclick="closePopupChangeFromIDriss()" class="block sm:hidden self-center justify-end hover:cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                    </div>
-                                    <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#11dd74]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
-                                        </svg>
-                                    </div>
-                                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                        <h3 class="text-lg leading-6 font-medium text-gray-900">Claim ownership of your IDriss</h3>
-                                        <div id="mailorphone" class="mt-2">
-                                            <p class="text-sm text-gray-500">
-                                                Verification with: <span id="firstInput"></span>
-                                                <button
-                                                    id="SendOTP"
-                                                    type="button"
-                                                    onclick=""
-                                                    class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#11dd74] text-base font-medium text-white hover:bg-[#11cc74] focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
-                                                >
-                                                    Send code
-                                                </button>
-                                            </p>
-                                            <div id="OTP" style="display:none" class="mt-2 sm:mt-0 mb-6 sm:w-60">
-                                                <!--IF TWITTER THEN NO OTP BUT TWEET-->
-                                                <p class="text-sm text-gray-500 mb-1">Input the code you have received:</p>
-                                                <input type="text" id="OTPInput" name="" class="shadow appearance-none border rounded w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="123456" autofocus />
-                                                <p id="otpError" class="text-red-500 font-medium hidden mt-1">Wrong OTP.</p>
-                                            </div>
-                                            <div id="WrapperPasswordChangeOwner" class="mt-2 mb-2 items-center sm:items-start">
-                                                <div id="addPassword">
-                                                    <div class="flex justify-center sm:justify-start mb-2">
-                                                        <input id="CheckboxPasswordChangeOwner" name="remember-me" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" onClick="ShowHidePassword()" />
-                                                        <label for="CheckboxPasswordChangeOwner" class="ml-2 block text-sm text-gray-500">Did you add a password?</label>
-                                                    </div>
-                                                    <div id="DivPasswordChangeOwner" style="display: none;" class="sm:w-60 lg:mx-0">
-                                                        <label class="text-sm text-gray-500 mb-2" for="InputPasswordChangeOwner"></label>
-                                                        <input
-                                                            type="text"
-                                                            id="InputPasswordChangeOwner"
-                                                            name="emailorphone"
-                                                            class="shadow appearance-none border rounded w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                            placeholder="Your password"
-                                                        />
-                                                        <br />
-                                                        <p id="ErrorWrongPasswordChangeOwner" class="text-red-500 font-medium hidden">This does not seem correct</p>
-                                                        <br />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div id="twitter" class="mt-2" style="display: none;">
-                                            <p class="text-sm text-gray-500 mb-2">
-                                                Tweet the following text with <span id="accountName"></span> to verify yourself.
-                                            </p>
-                                            <div id="tweet-wrapper">
-                                                <div class="border border-gray-300 rounded-md content-center p-1 hover:cursor-pointer" onclick="copyTweet();">
-                                                    <span class="text-xs" id="tweetContent" ></span>
-                                                </div>
-                                                <div id="tooltip" class="text-sm">Copied!</div>
-                                                <p id="noTweet-error" class="text-red-500 font-medium hidden mb-1">We could not find your tweet. Make sure it is in your most recent activities.</p>
-                                                <p id="noTwitter-error" class="text-red-500 font-medium hidden mb-1">Could not find your Twitter name, try again.</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div onclick="closePopupChangeFromIDriss()" class="hidden sm:block self-start ml-auto hover:cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                                <button
-                                    id="PopupButtonChangeOwnerFromIDriss"
-                                    type="button"
-                                    onclick=""
-                                    class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#11dd74] text-base font-medium text-white hover:bg-[#11cc74] focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
+                                <div
+                                    id="RewardsLinks"
+                                    class="flex pl-4 sm:pl-0 pb-5 sm:pb-0"
                                 >
-                                    Claim
-                                </button>
+                                    <div class="self-center">
+                                        <a
+                                            href=""
+                                            id="AddedIDrissNameRewards"
+                                            onclick=""
+                                            class="bg-green-100 text-[#11dd74] px-3 py-2 rounded-md text-sm font-medium"
+                                            aria-current="page"
+                                            style="cursor: default"
+                                            >IDriss</a
+                                        >
+                                    </div>
+                                    <div
+                                        onclick="openPopupAddNewIDrissRewards()"
+                                        class="ml-2 flex items-center text-sm text-gray-500 hover:cursor-pointer"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-5 w-5"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                        Add new IDriss
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="PopupChangeOwner" style="display:none" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true">
-                        </div>
-                        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                <div class="sm:flex sm:items-start">
-                                    <div onclick="closePopupChangeIDriss()" class="block sm:hidden self-center justify-end hover:cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
+                            <div class="border-t border-gray-200">
+                                <dl>
+                                    <div
+                                        class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                                    >
+                                        <dt
+                                            class="text-sm font-medium text-gray-500"
+                                        >
+                                            Your Referral Link
+                                        </dt>
+                                        <dd
+                                            class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                                        >
+                                            <ul
+                                                role="list"
+                                                class="border border-gray-200 rounded-md divide-y divide-gray-200"
+                                            >
+                                                <li
+                                                    class="pl-3 pr-4 py-3 flex items-center justify-between text-sm"
+                                                >
+                                                    <div
+                                                        class="w-0 flex-1 flex items-center"
+                                                    >
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            class="h-5 w-5 text-gray-500"
+                                                            viewBox="0 0 20 20"
+                                                            fill="currentColor"
+                                                        >
+                                                            <path
+                                                                fill-rule="evenodd"
+                                                                d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z"
+                                                                clip-rule="evenodd"
+                                                            />
+                                                        </svg>
+                                                        <div
+                                                            onclick="copyReferralLink()"
+                                                            class="ml-2 flex-1 w-0 truncate outline-0 bg-white"
+                                                        >
+                                                            <span
+                                                                id="ReferralLink"
+                                                            ></span>
+                                                            🥳🎈
+                                                        </div>
+                                                        <div
+                                                            id="tooltip3"
+                                                            class="text-sm"
+                                                        >
+                                                            Referral link
+                                                            copied!
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="ml-4 flex-shrink-0"
+                                                    >
+                                                        <a
+                                                            onclick="copyReferralLink()"
+                                                            class="font-medium text-indigo-600 hover:text-indigo-500 hover:cursor-pointer"
+                                                            >Copy</a
+                                                        >
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </dd>
                                     </div>
-                                    <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#11dd74]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
-                                        </svg>
-                                    </div>
-                                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                        <h3 class="text-lg leading-6 font-medium text-gray-900">Change the owner of your IDriss</h3>
-                                        <div class="mt-2">
-                                            <p class="text-sm text-gray-500 mb-2">Input the new owner address:</p>
-                                            <input type="text" id="InputChangeOwnerAddress" name="" class="shadow appearance-none border rounded w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="0x4d19afE0ff14dd74d30a7De4737b93583Baf92F5" autofocus>
+                                    <div
+                                        class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                                    >
+                                        <dt
+                                            class="text-sm font-medium text-gray-500"
+                                        >
+                                            Referrals
+                                        </dt>
+                                        <div class="flex">
+                                            <dd
+                                                class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                                            >
+                                                <span id="Referrals">0</span>
+                                            </dd>
                                         </div>
-                                            <p id="ErrorWrongChangeOwnerAddress" class="text-red-500 font-medium hidden mt-1">Wrong address format.</p>
-                                        <p id="ErrorWrongOwnerPopup1" class="text-red-500 font-medium hidden mt-1">You are not the owner of this IDriss.</p>
                                     </div>
-                                    <div onclick="closePopupChangeIDriss()" class="hidden sm:block self-start ml-auto hover:cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
+                                    <div
+                                        class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                                    >
+                                        <dt
+                                            class="text-sm font-medium text-gray-500"
+                                        >
+                                            Sign-Ups
+                                        </dt>
+                                        <dd
+                                            class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                                        >
+                                            <span id="RegisteredNames">0</span>
+                                        </dd>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                                <button id="PopupButtonChangeOwner" type="button" onclick="changeOwnerConfirm()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#11dd74] text-base font-medium text-white hover:bg-[#11cc74] focus:outline-none sm:ml-3 sm:w-24 sm:text-sm">
-                                    <span id="ButtonSpinner2">Change</span>
-                                    <div id="Spinner2" style="display:none" class="ml-1 flex justify-center items-center">
-                                       <div class="spinner-border animate-spin inline-block w-5 h-5 border-2 border-white rounded-full" role="status">
-                                         <span class="text-xl text-black">•</span>
-                                       </div>
-                                       <span class="ml-1 text-white text-base font-medium sm:text-sm"></span>
+                                    <div
+                                        class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                                    >
+                                        <dt
+                                            class="text-sm font-medium text-gray-500"
+                                        >
+                                            Add New Tweet
+                                        </dt>
+                                        <dd
+                                            class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                                        >
+                                            <ul
+                                                role="list"
+                                                class="border border-gray-200 rounded-md divide-y divide-gray-200"
+                                            >
+                                                <li
+                                                    class="pl-3 pr-4 py-3 flex items-center justify-between text-sm"
+                                                >
+                                                    <div
+                                                        class="w-0 flex-1 flex items-center"
+                                                    >
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            class="h-5 w-5 text-gray-500"
+                                                            viewBox="0 0 20 20"
+                                                            fill="currentColor"
+                                                        >
+                                                            <path
+                                                                fill-rule="evenodd"
+                                                                d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z"
+                                                                clip-rule="evenodd"
+                                                            />
+                                                        </svg>
+                                                        <input
+                                                            id="InputTweetLink"
+                                                            name="password"
+                                                            type="text"
+                                                            class="ml-2 flex-1 w-0 truncate outline-0 bg-gray-50"
+                                                            placeholder="https://twitter.com/IDriss_xyz/status/1490374875537625096"
+                                                            autofocus
+                                                        />
+                                                    </div>
+                                                    <div
+                                                        class="ml-4 flex-shrink-0"
+                                                    >
+                                                        <a
+                                                            id="ButtonAddTweet"
+                                                            onclick="addTweet()"
+                                                            class="font-medium text-indigo-600 hover:text-indigo-500 hover:cursor-pointer"
+                                                            >Add</a
+                                                        >
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <p
+                                                id="noTweetFoundError"
+                                                class="text-red-500 font-medium hidden mt-1"
+                                            >
+                                                Could not find your tweet.
+                                            </p>
+                                            <p
+                                                id="notMentionedError"
+                                                class="text-red-500 font-medium hidden mt-1"
+                                            >
+                                                Make sure your tweet contains
+                                                both #IDriss and @IDriss_xyz.
+                                            </p>
+                                        </dd>
                                     </div>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div id="PopupAddNewIDrissRewards" style="display:none" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true">
-                        </div>
-                        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                <div class="sm:flex sm:items-start">
-                                    <div onclick="closePopupAddNewIDrissRewards()" class="block sm:hidden self-center justify-end hover:cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
+                                    <div
+                                        class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                                    >
+                                        <dt
+                                            class="text-sm font-medium text-gray-500"
+                                        >
+                                            Twitter Likes
+                                        </dt>
+                                        <dd
+                                            class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                                        >
+                                            <span id="TwitterLikes">0</span>
+                                        </dd>
                                     </div>
-                                    <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#11dd74]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
+                                    <div
+                                        class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                                    >
+                                        <dt
+                                            class="text-sm font-medium text-gray-500"
+                                        >
+                                            Twitter Retweets
+                                        </dt>
+                                        <dd
+                                            class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                                        >
+                                            <span id="TwitterRetweets">0</span>
+                                        </dd>
                                     </div>
-                                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                            <h3 class="text-lg leading-6 font-medium text-gray-900">What is your IDriss?</h3>
-                                        <div class="mt-2">
-                                            <p class="text-sm text-gray-500 mb-2">Input your email, phone number or Twitter username:</p>
-                                            <input type="text" id="InputNewIDriss" name="" class="shadow appearance-none border rounded w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="" autofocus>
+                                    <div
+                                        class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                                    >
+                                        <dt
+                                            class="text-sm font-medium text-gray-500"
+                                        >
+                                            Discord Invites
+                                        </dt>
+                                        <div class="flex">
+                                            <dd
+                                                class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                                            >
+                                                <ul
+                                                    role="list"
+                                                    class="border border-gray-200 rounded-md divide-y divide-gray-200"
+                                                >
+                                                    <li
+                                                        class="pl-3 py-3 flex items-center justify-between text-sm"
+                                                    >
+                                                        <div
+                                                            class="w-7 flex-1 flex items-center"
+                                                        >
+                                                            <input
+                                                                id="InputDiscordInvites"
+                                                                disabled
+                                                                name="password"
+                                                                type="text"
+                                                                class="flex-1 w-0 outline-0 bg-white truncate"
+                                                                placeholder="0"
+                                                            />
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </dd>
+                                            <svg
+                                                onclick="enableInputDiscordInvites()"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                class="ml-2 h-5 w-5 text-gray-500 self-center hover:cursor-pointer"
+                                                viewBox="0 0 20 20"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
+                                                />
+                                            </svg>
                                         </div>
-                                            <p id="ErrorNoIDrissFound2" class="text-red-500 font-medium hidden mt-1">IDriss not found.</p>
                                     </div>
-                                    <div onclick="closePopupAddNewIDrissRewards()" class="hidden sm:block self-start ml-auto hover:cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                                <button id="ButtonAddNextIDriss" type="button" onclick="addNextIDriss()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#11dd74] text-base font-medium text-white hover:bg-[#11cc74] focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">Add</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div id="PopupDeleteIDriss" style="display:none" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true">
-                        </div>
-                        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                <div class="sm:flex sm:items-start">
-                                    <div onclick="closePopupDeleteIDriss()" class="block sm:hidden self-center justify-end hover:cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
+                                    <div
+                                        class="bg-green-100 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                                    >
+                                        <dt
+                                            class="text-sm font-bold text-gray-900"
+                                        >
+                                            TOTAL REWARD POINTS
+                                        </dt>
+                                        <div class="flex">
+                                            <dd
+                                                class="mt-1 text-sm font-bold text-gray-900 sm:mt-0 sm:col-span-2"
+                                            >
+                                                <span id="TotalRewards">0</span>
+                                            </dd>
+                                            <svg
+                                                id="ButtonRefreshRewards"
+                                                onclick="refreshRewards()"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                class="ml-2 mt-1 sm:mt-0 h-5 w-5 self-center text-gray-500 hover:cursor-pointer"
+                                                viewBox="0 0 20 20"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
+                                                    clip-rule="evenodd"
+                                                />
+                                            </svg>
+                                        </div>
                                     </div>
-                                    <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#e34234]" fill="none" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.5">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" />
-                                        </svg>
-                                    </div>
-                                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                        <h3 class="text-lg leading-6 font-medium text-gray-900">Delete your IDriss.</h3>
-                                        <p class="text-sm text-gray-500 mb-2 mt-2">Think twice. Deleting your IDriss can't be undone.</p>
-                                        <p id="notOwnerError" class="text-red-500 font-medium hidden mt-1">You are not the owner of this IDriss.</p>
-                                    </div>
-                                    <div onclick="closePopupDeleteIDriss()" class="hidden sm:block self-start ml-auto hover:cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                                <button id="PopupButtonDeleteIDriss" type="button" onclick="deleteIDrissConfirm()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#e34234] text-base font-medium text-white hover:bg-[#d9381e] focus:outline-none sm:ml-3 sm:w-24 sm:text-sm">
-                                    <span id="ButtonSpinner3">Delete</span>
-                                    <div id="Spinner3" style="display:none" class="ml-1 flex justify-center items-center">
-                                       <div class="spinner-border animate-spin inline-block w-5 h-5 border-2 border-white rounded-full" role="status">
-                                         <span class="text-xl text-black">•</span>
-                                       </div>
-                                       <span class="ml-1 text-white text-base font-medium sm:text-sm"></span>
-                                    </div>
-                                </button>
+                                </dl>
                             </div>
                         </div>
                     </div>
                 </div>
+            </main>
+        </div>
 
-                <div id="PopupAddReverse" style="display:none" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true">
-                        </div>
-                        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                <div class="sm:flex sm:items-start">
-                                    <div onclick="closePopupAddReverse()" class="block sm:hidden self-center justify-end hover:cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                    </div>
-                                    <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#11dd74]" fill="none" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.5">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
-                                        </svg>
-                                    </div>
-                                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                        <h3 class="text-lg leading-6 font-medium text-gray-900">Do you want to set a reverse record for this wallet address?</h3>
-                                        <p class="text-sm text-gray-500 mb-2 mt-2">Some dapps will display your IDriss instead of the wallet address, isn't it cool? 🌟 <a href="https://twitter.com/IDriss_xyz/status/1523820209563480064" target="_blank" class="underline text-[#5865F2]">Read more here.</a></p>
-                                        <p id="ReverseError" class="text-red-500 hidden font-medium mt-1">Something looks off. Please contact us on Twitter or Discord.</p>
-                                    </div>
-                                    <div onclick="closePopupAddReverse()" class="hidden sm:block self-start ml-auto hover:cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                    </div>
-                                </div>
+        <div
+            id="PopupAddIDriss"
+            style=""
+            class="fixed z-10 inset-0 overflow-y-auto"
+            aria-labelledby="modal-title"
+            role="dialog"
+            aria-modal="true"
+        >
+            <div
+                class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+            >
+                <div
+                    class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+                    aria-hidden="true"
+                ></div>
+                <span
+                    class="hidden sm:inline-block sm:align-middle sm:h-screen"
+                    aria-hidden="true"
+                    >&#8203;</span
+                >
+                <div
+                    class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                >
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div
+                                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-[#11dd74]"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    />
+                                </svg>
                             </div>
-                            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                                <button id="PopupButtonAddReverse" type="button" onclick="addReverseConfirm()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#11dd74] text-base font-medium text-white hover:bg-[#11cc74] focus:outline-none sm:ml-3 sm:w-24 sm:text-sm">
-                                    <span id="ButtonSpinner4">Confirm</span>
-                                    <div id="Spinner4" style="display:none" class="ml-1 flex justify-center items-center">
-                                       <div class="spinner-border animate-spin inline-block w-5 h-5 border-2 border-white rounded-full" role="status">
-                                         <span class="text-xl text-black">•</span>
-                                       </div>
-                                       <span class="ml-1 text-white text-base font-medium sm:text-sm"></span>
-                                    </div>
-                                </button>
+                            <div
+                                class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                            >
+                                <h3
+                                    class="text-lg leading-6 font-medium text-gray-900"
+                                >
+                                    What is your IDriss?
+                                </h3>
+                                <div class="mt-2">
+                                    <p class="text-sm text-gray-500 mb-2">
+                                        Input your email, phone number or
+                                        Twitter username:
+                                    </p>
+                                    <input
+                                        type="text"
+                                        id="InputIDriss"
+                                        name=""
+                                        class="shadow appearance-none border rounded w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        placeholder=""
+                                        autofocus
+                                    />
+                                </div>
+                                <p
+                                    id="ErrorNoIDrissFound"
+                                    class="text-red-500 font-medium hidden mt-1"
+                                >
+                                    No IDriss found. Did you register one?
+                                </p>
+                                <div
+                                    id="DivTxnHash"
+                                    class=""
+                                    style="display: none"
+                                >
+                                    <p class="text-sm text-gray-500 mb-2">
+                                        Input the transaction hash to re-check:
+                                    </p>
+                                    <input
+                                        type="text"
+                                        id="InputTxnHash"
+                                        name=""
+                                        class="shadow appearance-none border rounded w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        placeholder="0x7799373fd1ac413fcb24fa31ee6596921a45d813b7f4d9939080dd94f7b7d21e"
+                                        autofocus
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div
+                        class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+                    >
+                        <button
+                            id="ButtonAddIDriss"
+                            type="button"
+                            onclick="addIDriss()"
+                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#11dd74] text-base font-medium text-white hover:bg-[#11cc74] focus:outline-none sm:ml-3 sm:w-24 sm:text-sm"
+                        >
+                            <span id="ButtonSpinner1">Add</span>
+                            <div
+                                id="Spinner1"
+                                style="display: none"
+                                class="ml-1 flex justify-center items-center"
+                            >
+                                <div
+                                    class="spinner-border animate-spin inline-block w-5 h-5 border-2 border-white rounded-full"
+                                    role="status"
+                                >
+                                    <span class="text-xl text-black">•</span>
+                                </div>
+                                <span
+                                    class="ml-1 text-white text-base font-medium sm:text-sm"
+                                ></span>
+                            </div>
+                        </button>
+                    </div>
                 </div>
+            </div>
+        </div>
 
-                <div id="PopupDeleteReverse" style="display:none" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true">
-                        </div>
-                        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                <div class="sm:flex sm:items-start">
-                                    <div onclick="closePopupDeleteReverse()" class="block sm:hidden self-center justify-end hover:cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
+        <div
+            id="PopupChangeOwnerFromIDriss"
+            style="display: none"
+            class="fixed z-10 inset-0 overflow-y-auto"
+            aria-labelledby="modal-title"
+            role="dialog"
+            aria-modal="true"
+        >
+            <div
+                class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+            >
+                <div
+                    class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+                    aria-hidden="true"
+                ></div>
+                <span
+                    class="hidden sm:inline-block sm:align-middle sm:h-screen"
+                    aria-hidden="true"
+                    >&#8203;</span
+                >
+                <div
+                    class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                >
+                    <div class="bg-white px-4 pt-5">
+                        <div class="sm:flex sm:items-start">
+                            <div
+                                onclick="closePopupChangeFromIDriss()"
+                                class="block sm:hidden self-center justify-end hover:cursor-pointer"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-gray-500 ml-auto"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </div>
+                            <div
+                                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-[#11dd74]"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
+                                    />
+                                </svg>
+                            </div>
+                            <div
+                                class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                            >
+                                <h3
+                                    class="text-lg leading-6 font-medium text-gray-900"
+                                >
+                                    Claim ownership of your IDriss
+                                </h3>
+                                <div id="mailorphone" class="mt-2">
+                                    <p class="text-sm text-gray-500">
+                                        Verification with:
+                                        <span id="firstInput"></span>
+                                        <button
+                                            id="SendOTP"
+                                            type="button"
+                                            onclick=""
+                                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#11dd74] text-base font-medium text-white hover:bg-[#11cc74] focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
+                                        >
+                                            Send code
+                                        </button>
+                                    </p>
+                                    <div
+                                        id="OTP"
+                                        style="display: none"
+                                        class="mt-2 sm:mt-0 mb-6 sm:w-60"
+                                    >
+                                        <!--IF TWITTER THEN NO OTP BUT TWEET-->
+                                        <p class="text-sm text-gray-500 mb-1">
+                                            Input the code you have received:
+                                        </p>
+                                        <input
+                                            type="text"
+                                            id="OTPInput"
+                                            name=""
+                                            class="shadow appearance-none border rounded w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            placeholder="123456"
+                                            autofocus
+                                        />
+                                        <p
+                                            id="otpError"
+                                            class="text-red-500 font-medium hidden mt-1"
+                                        >
+                                            Wrong OTP.
+                                        </p>
                                     </div>
-                                    <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#e34234]" fill="none" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.5">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
-                                        </svg>
+                                    <div
+                                        id="WrapperPasswordChangeOwner"
+                                        class="mt-2 mb-2 items-center sm:items-start"
+                                    >
+                                        <div id="addPassword">
+                                            <div
+                                                class="flex justify-center sm:justify-start mb-2"
+                                            >
+                                                <input
+                                                    id="CheckboxPasswordChangeOwner"
+                                                    name="remember-me"
+                                                    type="checkbox"
+                                                    class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                                                    onClick="ShowHidePassword()"
+                                                />
+                                                <label
+                                                    for="CheckboxPasswordChangeOwner"
+                                                    class="ml-2 block text-sm text-gray-500"
+                                                    >Did you add a
+                                                    password?</label
+                                                >
+                                            </div>
+                                            <div
+                                                id="DivPasswordChangeOwner"
+                                                style="display: none"
+                                                class="sm:w-60 lg:mx-0"
+                                            >
+                                                <label
+                                                    class="text-sm text-gray-500 mb-2"
+                                                    for="InputPasswordChangeOwner"
+                                                ></label>
+                                                <input
+                                                    type="text"
+                                                    id="InputPasswordChangeOwner"
+                                                    name="emailorphone"
+                                                    class="shadow appearance-none border rounded w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                    placeholder="Your password"
+                                                />
+                                                <br />
+                                                <p
+                                                    id="ErrorWrongPasswordChangeOwner"
+                                                    class="text-red-500 font-medium hidden"
+                                                >
+                                                    This does not seem correct
+                                                </p>
+                                                <br />
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                        <h3 class="text-lg leading-6 font-medium text-gray-900">Do you want to remove the reverse record for this wallet address?</h3>
-                                        <p class="text-sm text-gray-500 mb-2 mt-2">It's a pretty cool feature, consider keeping it. <a href="https://twitter.com/IDriss_xyz/status/1523820209563480064" target="_blank" class="underline text-[#5865F2]">Read more here.</a></p>
-                                        <p id="DeleteReverseError" class="text-red-500 hidden font-medium mt-1">Something looks off. Please contact us on Twitter or Discord.</p>
-                                    </div>
-                                    <div onclick="closePopupDeleteReverse()" class="hidden sm:block self-start ml-auto hover:cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
+                                </div>
+
+                                <div
+                                    id="twitter"
+                                    class="mt-2"
+                                    style="display: none"
+                                >
+                                    <p class="text-sm text-gray-500 mb-2">
+                                        Tweet the following text with
+                                        <span id="accountName"></span>
+                                        to verify yourself.
+                                    </p>
+                                    <div id="tweet-wrapper">
+                                        <div
+                                            class="border border-gray-300 rounded-md content-center p-1 hover:cursor-pointer"
+                                            onclick="copyTweet();"
+                                        >
+                                            <span
+                                                class="text-xs"
+                                                id="tweetContent"
+                                            ></span>
+                                        </div>
+                                        <div id="tooltip" class="text-sm">
+                                            Copied!
+                                        </div>
+                                        <p
+                                            id="noTweet-error"
+                                            class="text-red-500 font-medium hidden mb-1"
+                                        >
+                                            We could not find your tweet. Make
+                                            sure it is in your most recent
+                                            activities.
+                                        </p>
+                                        <p
+                                            id="noTwitter-error"
+                                            class="text-red-500 font-medium hidden mb-1"
+                                        >
+                                            Could not find your Twitter name,
+                                            try again.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                                <button id="PopupButtonDeleteReverse" type="button" onclick="deleteReverseConfirm()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#e34234] text-base font-medium text-white hover:bg-[#d9381e] focus:outline-none sm:ml-3 sm:w-24 sm:text-sm">
-                                    <span id="ButtonSpinner5">Remove</span>
-                                    <div id="Spinner5" style="display:none" class="ml-1 flex justify-center items-center">
-                                       <div class="spinner-border animate-spin inline-block w-5 h-5 border-2 border-white rounded-full" role="status">
-                                         <span class="text-xl text-black">•</span>
-                                       </div>
-                                       <span class="ml-1 text-white text-base font-medium sm:text-sm"></span>
-                                    </div>
-                                </button>
+                            <div
+                                onclick="closePopupChangeFromIDriss()"
+                                class="hidden sm:block self-start ml-auto hover:cursor-pointer"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-gray-500"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
                             </div>
                         </div>
                     </div>
+                    <div
+                        class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+                    >
+                        <button
+                            id="PopupButtonChangeOwnerFromIDriss"
+                            type="button"
+                            onclick=""
+                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#11dd74] text-base font-medium text-white hover:bg-[#11cc74] focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
+                        >
+                            Claim
+                        </button>
+                    </div>
                 </div>
+            </div>
+        </div>
+
+        <div
+            id="PopupChangeOwner"
+            style="display: none"
+            class="fixed z-10 inset-0 overflow-y-auto"
+            aria-labelledby="modal-title"
+            role="dialog"
+            aria-modal="true"
+        >
+            <div
+                class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+            >
+                <div
+                    class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+                    aria-hidden="true"
+                ></div>
+                <span
+                    class="hidden sm:inline-block sm:align-middle sm:h-screen"
+                    aria-hidden="true"
+                    >&#8203;</span
+                >
+                <div
+                    class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                >
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div
+                                onclick="closePopupChangeIDriss()"
+                                class="block sm:hidden self-center justify-end hover:cursor-pointer"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-gray-500 ml-auto"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </div>
+                            <div
+                                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-[#11dd74]"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
+                                    />
+                                </svg>
+                            </div>
+                            <div
+                                class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                            >
+                                <h3
+                                    class="text-lg leading-6 font-medium text-gray-900"
+                                >
+                                    Change the owner of your IDriss
+                                </h3>
+                                <div class="mt-2">
+                                    <p class="text-sm text-gray-500 mb-2">
+                                        Input the new owner address:
+                                    </p>
+                                    <input
+                                        type="text"
+                                        id="InputChangeOwnerAddress"
+                                        name=""
+                                        class="shadow appearance-none border rounded w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        placeholder="0x4d19afE0ff14dd74d30a7De4737b93583Baf92F5"
+                                        autofocus
+                                    />
+                                </div>
+                                <p
+                                    id="ErrorWrongChangeOwnerAddress"
+                                    class="text-red-500 font-medium hidden mt-1"
+                                >
+                                    Wrong address format.
+                                </p>
+                                <p
+                                    id="ErrorWrongOwnerPopup1"
+                                    class="text-red-500 font-medium hidden mt-1"
+                                >
+                                    You are not the owner of this IDriss.
+                                </p>
+                            </div>
+                            <div
+                                onclick="closePopupChangeIDriss()"
+                                class="hidden sm:block self-start ml-auto hover:cursor-pointer"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-gray-500"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+                    >
+                        <button
+                            id="PopupButtonChangeOwner"
+                            type="button"
+                            onclick="changeOwnerConfirm()"
+                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#11dd74] text-base font-medium text-white hover:bg-[#11cc74] focus:outline-none sm:ml-3 sm:w-24 sm:text-sm"
+                        >
+                            <span id="ButtonSpinner2">Change</span>
+                            <div
+                                id="Spinner2"
+                                style="display: none"
+                                class="ml-1 flex justify-center items-center"
+                            >
+                                <div
+                                    class="spinner-border animate-spin inline-block w-5 h-5 border-2 border-white rounded-full"
+                                    role="status"
+                                >
+                                    <span class="text-xl text-black">•</span>
+                                </div>
+                                <span
+                                    class="ml-1 text-white text-base font-medium sm:text-sm"
+                                ></span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div
+            id="PopupAddNewIDrissRewards"
+            style="display: none"
+            class="fixed z-10 inset-0 overflow-y-auto"
+            aria-labelledby="modal-title"
+            role="dialog"
+            aria-modal="true"
+        >
+            <div
+                class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+            >
+                <div
+                    class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+                    aria-hidden="true"
+                ></div>
+                <span
+                    class="hidden sm:inline-block sm:align-middle sm:h-screen"
+                    aria-hidden="true"
+                    >&#8203;</span
+                >
+                <div
+                    class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                >
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div
+                                onclick="closePopupAddNewIDrissRewards()"
+                                class="block sm:hidden self-center justify-end hover:cursor-pointer"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-gray-500 ml-auto"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </div>
+                            <div
+                                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-[#11dd74]"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    />
+                                </svg>
+                            </div>
+                            <div
+                                class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                            >
+                                <h3
+                                    class="text-lg leading-6 font-medium text-gray-900"
+                                >
+                                    What is your IDriss?
+                                </h3>
+                                <div class="mt-2">
+                                    <p class="text-sm text-gray-500 mb-2">
+                                        Input your email, phone number or
+                                        Twitter username:
+                                    </p>
+                                    <input
+                                        type="text"
+                                        id="InputNewIDriss"
+                                        name=""
+                                        class="shadow appearance-none border rounded w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        placeholder=""
+                                        autofocus
+                                    />
+                                </div>
+                                <p
+                                    id="ErrorNoIDrissFound2"
+                                    class="text-red-500 font-medium hidden mt-1"
+                                >
+                                    IDriss not found.
+                                </p>
+                            </div>
+                            <div
+                                onclick="closePopupAddNewIDrissRewards()"
+                                class="hidden sm:block self-start ml-auto hover:cursor-pointer"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-gray-500"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+                    >
+                        <button
+                            id="ButtonAddNextIDriss"
+                            type="button"
+                            onclick="addNextIDriss()"
+                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#11dd74] text-base font-medium text-white hover:bg-[#11cc74] focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
+                        >
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div
+            id="PopupDeleteIDriss"
+            style="display: none"
+            class="fixed z-10 inset-0 overflow-y-auto"
+            aria-labelledby="modal-title"
+            role="dialog"
+            aria-modal="true"
+        >
+            <div
+                class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+            >
+                <div
+                    class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+                    aria-hidden="true"
+                ></div>
+                <span
+                    class="hidden sm:inline-block sm:align-middle sm:h-screen"
+                    aria-hidden="true"
+                    >&#8203;</span
+                >
+                <div
+                    class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                >
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div
+                                onclick="closePopupDeleteIDriss()"
+                                class="block sm:hidden self-center justify-end hover:cursor-pointer"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-gray-500 ml-auto"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </div>
+                            <div
+                                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-[#e34234]"
+                                    fill="none"
+                                    viewBox="0 0 20 20"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                    />
+                                </svg>
+                            </div>
+                            <div
+                                class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                            >
+                                <h3
+                                    class="text-lg leading-6 font-medium text-gray-900"
+                                >
+                                    Delete your IDriss.
+                                </h3>
+                                <p class="text-sm text-gray-500 mb-2 mt-2">
+                                    Think twice. Deleting your IDriss can't be
+                                    undone.
+                                </p>
+                                <p
+                                    id="notOwnerError"
+                                    class="text-red-500 font-medium hidden mt-1"
+                                >
+                                    You are not the owner of this IDriss.
+                                </p>
+                            </div>
+                            <div
+                                onclick="closePopupDeleteIDriss()"
+                                class="hidden sm:block self-start ml-auto hover:cursor-pointer"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-gray-500"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+                    >
+                        <button
+                            id="PopupButtonDeleteIDriss"
+                            type="button"
+                            onclick="deleteIDrissConfirm()"
+                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#e34234] text-base font-medium text-white hover:bg-[#d9381e] focus:outline-none sm:ml-3 sm:w-24 sm:text-sm"
+                        >
+                            <span id="ButtonSpinner3">Delete</span>
+                            <div
+                                id="Spinner3"
+                                style="display: none"
+                                class="ml-1 flex justify-center items-center"
+                            >
+                                <div
+                                    class="spinner-border animate-spin inline-block w-5 h-5 border-2 border-white rounded-full"
+                                    role="status"
+                                >
+                                    <span class="text-xl text-black">•</span>
+                                </div>
+                                <span
+                                    class="ml-1 text-white text-base font-medium sm:text-sm"
+                                ></span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div
+            id="PopupAddReverse"
+            style="display: none"
+            class="fixed z-10 inset-0 overflow-y-auto"
+            aria-labelledby="modal-title"
+            role="dialog"
+            aria-modal="true"
+        >
+            <div
+                class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+            >
+                <div
+                    class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+                    aria-hidden="true"
+                ></div>
+                <span
+                    class="hidden sm:inline-block sm:align-middle sm:h-screen"
+                    aria-hidden="true"
+                    >&#8203;</span
+                >
+                <div
+                    class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                >
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div
+                                onclick="closePopupAddReverse()"
+                                class="block sm:hidden self-center justify-end hover:cursor-pointer"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-gray-500 ml-auto"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </div>
+                            <div
+                                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-[#11dd74]"
+                                    fill="none"
+                                    viewBox="0 0 20 20"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z"
+                                    />
+                                </svg>
+                            </div>
+                            <div
+                                class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                            >
+                                <h3
+                                    class="text-lg leading-6 font-medium text-gray-900"
+                                >
+                                    Do you want to set a reverse record for this
+                                    wallet address?
+                                </h3>
+                                <p class="text-sm text-gray-500 mb-2 mt-2">
+                                    Some dapps will display your IDriss instead
+                                    of the wallet address, isn't it cool? 🌟
+                                    <a
+                                        href="https://twitter.com/IDriss_xyz/status/1523820209563480064"
+                                        target="_blank"
+                                        class="underline text-[#5865F2]"
+                                        >Read more here.</a
+                                    >
+                                </p>
+                                <p
+                                    id="ReverseError"
+                                    class="text-red-500 hidden font-medium mt-1"
+                                >
+                                    Something looks off. Please contact us on
+                                    Twitter or Discord.
+                                </p>
+                            </div>
+                            <div
+                                onclick="closePopupAddReverse()"
+                                class="hidden sm:block self-start ml-auto hover:cursor-pointer"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-gray-500"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+                    >
+                        <button
+                            id="PopupButtonAddReverse"
+                            type="button"
+                            onclick="addReverseConfirm()"
+                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#11dd74] text-base font-medium text-white hover:bg-[#11cc74] focus:outline-none sm:ml-3 sm:w-24 sm:text-sm"
+                        >
+                            <span id="ButtonSpinner4">Confirm</span>
+                            <div
+                                id="Spinner4"
+                                style="display: none"
+                                class="ml-1 flex justify-center items-center"
+                            >
+                                <div
+                                    class="spinner-border animate-spin inline-block w-5 h-5 border-2 border-white rounded-full"
+                                    role="status"
+                                >
+                                    <span class="text-xl text-black">•</span>
+                                </div>
+                                <span
+                                    class="ml-1 text-white text-base font-medium sm:text-sm"
+                                ></span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div
+            id="PopupDeleteReverse"
+            style="display: none"
+            class="fixed z-10 inset-0 overflow-y-auto"
+            aria-labelledby="modal-title"
+            role="dialog"
+            aria-modal="true"
+        >
+            <div
+                class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+            >
+                <div
+                    class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+                    aria-hidden="true"
+                ></div>
+                <span
+                    class="hidden sm:inline-block sm:align-middle sm:h-screen"
+                    aria-hidden="true"
+                    >&#8203;</span
+                >
+                <div
+                    class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                >
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div
+                                onclick="closePopupDeleteReverse()"
+                                class="block sm:hidden self-center justify-end hover:cursor-pointer"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-gray-500 ml-auto"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </div>
+                            <div
+                                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-[#e34234]"
+                                    fill="none"
+                                    viewBox="0 0 20 20"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z"
+                                    />
+                                </svg>
+                            </div>
+                            <div
+                                class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                            >
+                                <h3
+                                    class="text-lg leading-6 font-medium text-gray-900"
+                                >
+                                    Do you want to remove the reverse record for
+                                    this wallet address?
+                                </h3>
+                                <p class="text-sm text-gray-500 mb-2 mt-2">
+                                    It's a pretty cool feature, consider keeping
+                                    it.
+                                    <a
+                                        href="https://twitter.com/IDriss_xyz/status/1523820209563480064"
+                                        target="_blank"
+                                        class="underline text-[#5865F2]"
+                                        >Read more here.</a
+                                    >
+                                </p>
+                                <p
+                                    id="DeleteReverseError"
+                                    class="text-red-500 hidden font-medium mt-1"
+                                >
+                                    Something looks off. Please contact us on
+                                    Twitter or Discord.
+                                </p>
+                            </div>
+                            <div
+                                onclick="closePopupDeleteReverse()"
+                                class="hidden sm:block self-start ml-auto hover:cursor-pointer"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 text-gray-500"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+                    >
+                        <button
+                            id="PopupButtonDeleteReverse"
+                            type="button"
+                            onclick="deleteReverseConfirm()"
+                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#e34234] text-base font-medium text-white hover:bg-[#d9381e] focus:outline-none sm:ml-3 sm:w-24 sm:text-sm"
+                        >
+                            <span id="ButtonSpinner5">Remove</span>
+                            <div
+                                id="Spinner5"
+                                style="display: none"
+                                class="ml-1 flex justify-center items-center"
+                            >
+                                <div
+                                    class="spinner-border animate-spin inline-block w-5 h-5 border-2 border-white rounded-full"
+                                    role="status"
+                                >
+                                    <span class="text-xl text-black">•</span>
+                                </div>
+                                <span
+                                    class="ml-1 text-white text-base font-medium sm:text-sm"
+                                ></span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script src="https://unpkg.com/idriss-crypto/lib/bundle/global.js"></script>
         <script type="text/javascript" src="../static/js/web3.min.js"></script>
         <script type="text/javascript" src="../static/js/web3modal.js"></script>
-        <script type="text/javascript" src="../static/js/walletlink.bundle.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+        <script
+            type="text/javascript"
+            src="../static/js/walletlink.bundle.js"
+        ></script>
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"
+            type="text/javascript"
+        ></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider@1.7.0/dist/umd/index.min.js"></script>
+        <script
+            type="text/javascript"
+            src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="https://unpkg.com/@walletconnect/web3-provider@1.7.0/dist/umd/index.min.js"
+        ></script>
         <script src="../static/js/javascriptDashboard.js"></script>
-   </body>
+    </body>
 </html>
